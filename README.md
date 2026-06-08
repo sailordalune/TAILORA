@@ -6,10 +6,10 @@ Project ini dibuat sebagai bagian dari tugas akhir mata kuliah Desain Antarmuka 
 
 ## Live Demo
 
-Website dapat diakses melalui link deployment berikut:
+Website Tailora dapat diakses melalui link berikut:
 
 ```text
-tailoraa.vercel.app
+https://tailoraa.vercel.app/
 ```
 
 ## Latar Belakang
@@ -31,12 +31,12 @@ Tujuan dari pengembangan Tailora adalah:
 
 ## Fitur Utama
 
-* Landing page Tailora
+* Homepage Tailora
 * Katalog penjahit
 * Detail profil penjahit
 * Form pemesanan jasa permak dan custom pakaian
 * Virtual measurement / panduan pengukuran tubuh
-* Halaman pesanan dan pelacakan progres pesanan
+* Halaman pesanan dan tracking pesanan
 * Profil pengguna
 * Review pesanan setelah selesai
 * Tampilan responsif untuk desktop dan mobile
@@ -49,23 +49,41 @@ Alur utama pengguna pada platform Tailora adalah sebagai berikut:
 2. Pengguna mencari atau memilih penjahit melalui halaman katalog.
 3. Pengguna melihat detail profil penjahit, layanan, portofolio, dan ulasan.
 4. Pengguna membuat pesanan jasa permak atau custom pakaian.
-5. Pengguna mengisi detail pesanan dan ukuran tubuh.
+5. Pengguna mengisi detail pesanan dan ukuran tubuh melalui fitur virtual measurement.
 6. Pengguna memilih metode pengiriman dan melakukan konfirmasi pesanan.
-7. Pengguna memantau progres pengerjaan melalui halaman pesanan.
+7. Pengguna memantau progres pengerjaan melalui halaman tracking pesanan.
 8. Setelah pesanan selesai, pengguna dapat memberikan ulasan terhadap penjahit.
 
 ## Konsep Desain
 
 Tailora mengusung konsep visual yang hangat, elegan, modern, dan premium. Desain dibuat dengan pendekatan fashion-tech agar sesuai dengan karakter layanan jahit, permak, dan custom pakaian.
 
-Warna utama yang digunakan terdiri dari nuansa ivory, warm white, deep brown, muted gold, dan soft beige. Tipografi yang digunakan mengombinasikan font playfair display untuk memberikan kesan elegan pada heading dan font inter untuk menjaga keterbacaan pada isi konten.
+Warna utama yang digunakan terdiri dari nuansa ivory, warm white, deep brown, muted gold, dan soft beige. Tipografi yang digunakan mengombinasikan Playfair Display untuk memberikan kesan elegan pada heading dan Inter untuk menjaga keterbacaan pada isi konten.
+
+## UI Kit
+
+UI Kit Tailora disusun sebagai dasar konsistensi visual pada desain website dan mobile app. Struktur UI Kit mencakup:
+
+* Color system
+* Typography system
+* Grid / layout system
+* Button component
+* Input dan form component
+* Card component
+* Navigation component
+* Badge dan status component
+* Progress tracking component
+
+UI Kit digunakan untuk menjaga agar tampilan Tailora tetap konsisten, reusable, dan mudah diterapkan dalam implementasi front-end.
 
 ## Teknologi yang Digunakan
 
 * React
 * TypeScript
 * Vite
-* CSS
+* Tailwind CSS
+* Lucide React
+* Motion
 * Vercel untuk deployment
 
 ## Struktur Project
@@ -74,15 +92,21 @@ Warna utama yang digunakan terdiri dari nuansa ivory, warm white, deep brown, mu
 TAILORA/
 ├── src/
 │   ├── app/
-│   ├── components/
-│   └── main.tsx
+│   ├── imports/
+│   ├── styles/
+│   ├── main.tsx
+│   └── vite-env.d.ts
+├── default_shadcn_theme.css
 ├── index.html
 ├── package.json
+├── package-lock.json
+├── postcss.config.mjs
+├── tsconfig.json
 ├── vite.config.ts
 └── README.md
 ```
 
-Struktur folder dapat menyesuaikan pengembangan project. Folder `src` berisi kode utama aplikasi, komponen antarmuka, serta halaman yang digunakan pada website Tailora.
+Folder `src/app` berisi struktur utama aplikasi dan komponen halaman. Folder `src/imports` digunakan untuk menyimpan aset gambar yang digunakan pada tampilan website. Folder `src/styles` digunakan untuk pengaturan styling tambahan.
 
 ## Cara Menjalankan Project
 
@@ -130,7 +154,7 @@ Hasil build akan tersimpan pada folder `dist`.
 
 ## Deployment
 
-Project ini dideploy menggunakan Vercel. Setiap perubahan yang sudah di-push ke repository GitHub dapat dihubungkan dengan Vercel untuk proses deployment secara otomatis.
+Project ini dideploy menggunakan Vercel. Setiap perubahan yang sudah di-push ke repository GitHub dapat terhubung dengan Vercel untuk proses deployment secara otomatis.
 
 ## Status Project
 
@@ -139,7 +163,7 @@ Project ini masih berupa implementasi front-end. Data yang digunakan pada websit
 ## Batasan Project
 
 * Project ini belum menggunakan backend dan database.
-* Data penjahit, pesanan, profil pengguna, dan ulasan masih bersifat statis/dummy.
+* Data penjahit, pesanan, profil pengguna, pembayaran, dan ulasan masih bersifat statis/dummy.
 * Sistem autentikasi, pembayaran, dan tracking pesanan masih berupa simulasi front-end.
 * Fokus utama project berada pada desain antarmuka, konsistensi UI Kit, dan implementasi front-end responsif.
 
