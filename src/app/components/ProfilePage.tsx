@@ -5,28 +5,16 @@ import {
 } from 'lucide-react';
 import { motion } from 'motion/react';
 import profileImg from '../../imports/profile.png';
+import {
+  addresses,
+  notificationPreferences,
+  paymentMethods,
+  profileStats,
+  savedMeasurements,
+  securityRows,
+} from '../data/profile';
 
 type Props = { onBack: () => void; onOpenMeasurement: () => void };
-
-const savedMeasurements = [
-  { label: 'Lingkar Dada', value: '88 cm' },
-  { label: 'Lingkar Pinggang', value: '68 cm' },
-  { label: 'Lingkar Pinggul', value: '94 cm' },
-  { label: 'Panjang Lengan', value: '58 cm' },
-  { label: 'Panjang Bahu', value: '38 cm' },
-  { label: 'Tinggi Badan', value: '165 cm' },
-];
-
-const addresses = [
-  { id: 1, label: 'Rumah', name: 'Akmal Baihaqii', phone: '+62 812-3456-7890', detail: 'Cluster Silver Sand Blok B7 No. 18, CitraLand Puncak Tidar, Malang, Jawa Timur 65151', primary: true },
-  { id: 2, label: 'Kantor', name: 'Akmal Baihaqii', phone: '+62 812-3456-7890', detail: 'Araya Business Center, Jl. Raya Araya, Kota Malang, Jawa Timur 65126', primary: false },
-];
-
-const paymentMethods = [
-  { id: 1, type: 'BCA', label: 'Virtual Account', last: '7821', primary: true },
-  { id: 2, type: 'Visa', label: 'Kredit •••• 4242', last: '4242', primary: false },
-  { id: 3, type: 'OVO', label: 'E-Wallet', last: '7890', primary: false },
-];
 
 type SectionId = 'measurement' | 'address' | 'payment' | 'notif' | 'security';
 
@@ -88,11 +76,7 @@ export function ProfilePage({ onBack, onOpenMeasurement }: Props) {
           </div>
 
           <div className="relative grid grid-cols-3 gap-4 mt-8 pt-8 border-t border-white/10">
-            {[
-              { label: 'Total Pesanan', value: '12' },
-              { label: 'Penjahit Favorit', value: '4' },
-              { label: 'Total Spending', value: 'Rp 6jt' },
-            ].map((s) => (
+            {profileStats.map((s) => (
               <div key={s.label}>
                 <div className="text-[10px] tracking-[0.3em] uppercase text-[#D4B896] mb-1.5" style={{ fontFamily: 'Space Mono, monospace', fontWeight: 700 }}>
                   {s.label}
@@ -262,12 +246,7 @@ export function ProfilePage({ onBack, onOpenMeasurement }: Props) {
               <>
                 <SectionHeader title="Preferensi" italic="Notifikasi" desc="Pilih bagaimana kami menghubungi Anda." />
                 <div className="space-y-3">
-                  {[
-                    { label: 'Update progress pesanan', desc: 'Notifikasi saat status pesanan berubah', on: true },
-                    { label: 'Pesan baru dari penjahit', desc: 'Chat dan konsultasi langsung', on: true },
-                    { label: 'Promo & editorial', desc: 'Newsletter mingguan dari Tailora', on: false },
-                    { label: 'Reminder fitting', desc: 'Pengingat jadwal fitting offline', on: true },
-                  ].map((n) => (
+                  {notificationPreferences.map((n) => (
                     <ToggleRow key={n.label} label={n.label} desc={n.desc} on={n.on} />
                   ))}
                 </div>
@@ -278,10 +257,9 @@ export function ProfilePage({ onBack, onOpenMeasurement }: Props) {
               <>
                 <SectionHeader title="Akun &" italic="Keamanan" desc="Lindungi akun Anda dengan password kuat dan 2FA." />
                 <div className="space-y-3">
-                  <SecurityRow label="Password" value="Diperbarui 2 bulan lalu" cta="Ubah" />
-                  <SecurityRow label="Verifikasi 2 Langkah" value="SMS ke +62 812-3456-7890" cta="Kelola" />
-                  <SecurityRow label="Sesi Aktif" value="2 perangkat" cta="Lihat" />
-                  <SecurityRow label="Hapus Akun" value="Permanen — tidak dapat dibatalkan" cta="Hapus" danger />
+                  {securityRows.map((row) => (
+                    <SecurityRow key={row.label} label={row.label} value={row.value} cta={row.cta} danger={row.danger} />
+                  ))}
                 </div>
               </>
             )}

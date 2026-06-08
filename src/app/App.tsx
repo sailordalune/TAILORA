@@ -12,7 +12,8 @@ import { OrdersPage } from "./components/OrdersPage";
 import { VirtualMeasurement } from "./components/VirtualMeasurement";
 import { ProfilePage } from "./components/ProfilePage";
 import { Reveal } from "./components/Reveal";
-import { TailorDetail, TailorData } from "./components/TailorDetail";
+import { TailorDetail } from "./components/TailorDetail";
+import { TailorData } from "./data/tailors";
 
 type Page = "home" | "search" | "orders" | "measurement" | "profile" | "faq";
 

@@ -1,110 +1,13 @@
 import React, { useState } from 'react';
 import {
-  ArrowLeft, Inbox, Cog, Scissors, Ruler, CheckCircle2, Clock, MessageCircle, Phone,
+  ArrowLeft, Scissors, Ruler, CheckCircle2, Clock, MessageCircle, Phone,
   MapPin, Star, ChevronRight, Package, Calendar, CreditCard, FileText, AlertCircle, X,
   TrendingUp, Sparkles, ChevronDown,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ImageWithFallback } from './common/ImageWithFallback';
 import { ReviewModal, ReviewOrder } from './ReviewModal';
-import toko1Img from '../../imports/toko1.jpg';
-import toko2Img from '../../imports/toko2.jpg';
-import toko3Img from '../../imports/toko3.jpg';
-import toko4Img from '../../imports/toko4.jpg';
-import toko5Img from '../../imports/toko5.jpg';
-import toko6Img from '../../imports/toko6.jpg';
-
-type OrderStatus = 'diterima' | 'diproses' | 'dijahit' | 'fitting' | 'selesai' | 'dibatalkan';
-
-type Order = {
-  id: string;
-  tailor: { name: string; image: string; location: string; rating: number };
-  service: string;
-  clothing: string;
-  quantity: number;
-  status: OrderStatus;
-  stage: number; // 0-4 matching steps
-  createdAt: string;
-  eta: string;
-  price: number;
-  paid: number;
-  notes?: string;
-};
-
-const stages = [
-  { id: 'diterima', label: 'Diterima', desc: 'Pesanan diterima & dikonfirmasi penjahit', icon: Inbox },
-  { id: 'diproses', label: 'Diproses', desc: 'Persiapan bahan & pola', icon: Cog },
-  { id: 'dijahit', label: 'Dijahit', desc: 'Proses jahit sedang berlangsung', icon: Scissors },
-  { id: 'fitting', label: 'Fitting', desc: 'Pengepasan & penyesuaian akhir', icon: Ruler },
-  { id: 'selesai', label: 'Selesai', desc: 'Pakaian siap diambil / dikirim', icon: CheckCircle2 },
-];
-
-const mockOrders: Order[] = [
-  {
-    id: 'TLR-482931',
-    tailor: {
-      name: 'Rina Boutique', location: 'Bandung', rating: 4.9,
-      image: toko1Img,
-    },
-    service: 'Jahit Baru', clothing: 'Kebaya Modern', quantity: 1,
-    status: 'dijahit', stage: 2,
-    createdAt: '15 Apr 2026', eta: '28 Apr 2026',
-    price: 400000, paid: 120000,
-    notes: 'Model kutubaru lengan panjang dengan detail payet di bagian dada.',
-  },
-  {
-    id: 'TLR-471822',
-    tailor: {
-      name: 'Atelier By Budi', location: 'Jakarta Selatan', rating: 4.9,
-      image: toko2Img,
-    },
-    service: 'Custom', clothing: 'Jas Formal 2-piece', quantity: 1,
-    status: 'fitting', stage: 3,
-    createdAt: '2 Apr 2026', eta: '24 Apr 2026',
-    price: 850000, paid: 255000,
-    notes: 'Warna navy, material wool Italia, slim fit.',
-  },
-  {
-    id: 'TLR-465114',
-    tailor: {
-      name: 'Maison Sari', location: 'Yogyakarta', rating: 4.8,
-      image: toko3Img,
-    },
-    service: 'Permak', clothing: 'Batik Parang', quantity: 2,
-    status: 'diproses', stage: 1,
-    createdAt: '19 Apr 2026', eta: '25 Apr 2026',
-    price: 80000, paid: 24000,
-  },
-  {
-    id: 'TLR-449022',
-    tailor: {
-      name: 'Dewi Couture', location: 'Bali', rating: 4.9,
-      image: toko4Img,
-    },
-    service: 'Custom', clothing: 'Gaun Pengantin', quantity: 1,
-    status: 'selesai', stage: 4,
-    createdAt: '10 Feb 2026', eta: '20 Mar 2026',
-    price: 1500000, paid: 1500000,
-  },
-  {
-    id: 'TLR-442015',
-    tailor: {
-      name: 'Permak Express', location: 'Jakarta Pusat', rating: 4.7,
-      image: toko6Img,
-    },
-    service: 'Permak', clothing: 'Kemeja', quantity: 3,
-    status: 'diterima', stage: 0,
-    createdAt: '22 Apr 2026', eta: '26 Apr 2026',
-    price: 50000, paid: 15000,
-  },
-];
-
-const tabs = [
-  { id: 'all', label: 'Semua' },
-  { id: 'aktif', label: 'Aktif' },
-  { id: 'selesai', label: 'Selesai' },
-  { id: 'dibatalkan', label: 'Dibatalkan' },
-];
+import { mockOrders, Order, orderStages, orderTabs } from '../data/orders';
 
 type Props = { onBack: () => void };
 
@@ -217,7 +120,7 @@ export function OrdersPage({ onBack }: Props) {
 
         {/* Tabs */}
         <div className="flex items-center gap-1 mb-6 bg-white border border-[#2C1810]/10 rounded-full p-1.5 w-fit overflow-x-auto">
-          {tabs.map((t) => {
+          {orderTabs.map((t) => {
             const active = tab === t.id;
             return (
               <button
@@ -373,8 +276,8 @@ function StatCard({
 }
 
 function OrderCard({ order, onClick, index, formatRp }: { order: Order; onClick: () => void; index: number; formatRp: (n: number) => string }) {
-  const currentStage = stages[order.stage];
-  const progress = ((order.stage + 1) / stages.length) * 100;
+  const currentStage = orderStages[order.stage];
+  const progress = ((order.stage + 1) / orderStages.length) * 100;
   const statusColor = order.status === 'selesai' ? 'text-[#4A7A5C] bg-[#4A7A5C]/10 border-[#4A7A5C]/30' :
                        order.status === 'dibatalkan' ? 'text-[#C07A50] bg-[#C07A50]/10 border-[#C07A50]/30' :
                        'text-[#8B6544] bg-[#B8926A]/15 border-[#B8926A]/30';
@@ -492,7 +395,7 @@ function OrderDetail({ order, onBack }: { order: Order; onBack: () => void }) {
   const [hasReviewed, setHasReviewed] = useState(false);
   const formatRp = (n: number) => 'Rp ' + n.toLocaleString('id-ID');
   const remaining = order.price * order.quantity - order.paid;
-  const progress = ((order.stage + 1) / stages.length) * 100;
+  const progress = ((order.stage + 1) / orderStages.length) * 100;
 
   const timestamps: Record<string, string> = {
     diterima: '15 Apr · 14:20',
@@ -580,11 +483,11 @@ function OrderDetail({ order, onBack }: { order: Order; onBack: () => void }) {
                 <motion.div
                   className="absolute left-6 top-0 w-0.5 bg-gradient-to-b from-[#B8926A] to-[#8B6D4F]"
                   initial={{ height: 0 }}
-                  animate={{ height: `${(order.stage / (stages.length - 1)) * 100}%` }}
+                  animate={{ height: `${(order.stage / (orderStages.length - 1)) * 100}%` }}
                   transition={{ duration: 0.8 }}
                 />
                 <div className="space-y-6">
-                  {stages.map((s, i) => {
+                  {orderStages.map((s, i) => {
                     const done = i < order.stage;
                     const current = i === order.stage;
                     const pending = i > order.stage;

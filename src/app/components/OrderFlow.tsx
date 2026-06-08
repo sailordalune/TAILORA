@@ -5,7 +5,7 @@ import {
   Camera, Video, FileText, Plus, Minus, Star, Home, Store, Package, Bike, Send, MessageCircle, Loader2, BadgeCheck, Phone, PhoneOff, Mic, MicOff, Paperclip,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { TailorData } from './TailorDetail';
+import { TailorData } from '../data/tailors';
 import { ImageWithFallback } from './common/ImageWithFallback';
 import { VirtualMeasurement } from './VirtualMeasurement';
 import { ManualMeasurement } from './ManualMeasurement';

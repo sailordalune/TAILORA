@@ -1,59 +1,6 @@
 import React from 'react';
-import { Star, MapPin, ArrowRight, Award, MessageSquareQuote } from 'lucide-react';
-import { motion } from 'motion/react';
-import { ImageWithFallback } from './common/ImageWithFallback';
 import { TailorCard } from './TailorCard';
-import { TailorData } from './TailorDetail';
-import toko1Img from '../../imports/toko1.jpg';
-import toko2Img from '../../imports/toko2.jpg';
-import toko3Img from '../../imports/toko3.jpg';
-
-const tailorsRaw = [
-  {
-    name: 'Rina Boutique',
-    rating: 4.9,
-    reviews: 312,
-    specialty: 'Kebaya & Gaun Pengantin',
-    clothing: 'Kebaya',
-    service: 'Jahit Baru',
-    price: 'Mulai Rp 350rb',
-    image: toko1Img,
-    location: 'Bandung',
-    tag: 'Top Rated',
-    yearsExp: 12,
-    quote: 'Detail kebayanya rapii, fitting presisi',
-  },
-  {
-    name: 'Atelier By Budi',
-    rating: 4.9,
-    reviews: 248,
-    specialty: 'Jas Formal & Kemeja Pria',
-    clothing: 'Jas Formal',
-    service: 'Jahit Baru',
-    price: 'Mulai Rp 700rb',
-    image: toko2Img,
-    location: 'Jakarta Selatan',
-    tag: 'Top Rated',
-    yearsExp: 15,
-    quote: 'Jas custom terbaik yang pernah saya coba',
-  },
-  {
-    name: 'Maison Sari',
-    rating: 4.8,
-    reviews: 196,
-    specialty: 'Batik & Wastra Modern',
-    clothing: 'Batik',
-    service: 'Custom',
-    price: 'Mulai Rp 250rb',
-    image: toko3Img,
-    location: 'Yogyakarta',
-    tag: 'Featured',
-    yearsExp: 8,
-    quote: 'Sukaa banget perpaduan batik dengan model yang terkini',
-  },
-];
-
-const tailors = [...tailorsRaw].sort((a, b) => b.rating - a.rating || b.reviews - a.reviews);
+import { recommendedTailors, TailorData } from '../data/tailors';
 
 type Props = {
   onSelectTailor?: (tailor: TailorData) => void;
@@ -78,13 +25,13 @@ export function TailorRecommendations({ onSelectTailor }: Props = {}) {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {tailors.map((tailor, idx) => (
+        {recommendedTailors.map((tailor, idx) => (
           <TailorCard
             key={tailor.name}
             tailor={tailor}
             variant="recommendation"
             index={idx}
-            onClick={() => onSelectTailor && onSelectTailor(tailor as TailorData)}
+            onClick={() => onSelectTailor && onSelectTailor(tailor)}
           />
         ))}
       </div>

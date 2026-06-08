@@ -2,50 +2,8 @@ import React, { useState, useMemo } from 'react';
 import { Search, SlidersHorizontal, X, ChevronDown, MapPin, Star, Award, ArrowRight, Check } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ImageWithFallback } from './common/ImageWithFallback';
-import { TailorDetail, TailorData } from './TailorDetail';
-import toko1Img from '../../imports/toko1.jpg';
-import toko2Img from '../../imports/toko2.jpg';
-import toko3Img from '../../imports/toko3.jpg';
-import toko4Img from '../../imports/toko4.jpg';
-import toko5Img from '../../imports/toko5.jpg';
-import toko6Img from '../../imports/toko6.jpg';
-
-const locations = ['Semua Lokasi', 'Jakarta Selatan', 'Jakarta Pusat', 'Bandung', 'Yogyakarta', 'Surabaya', 'Bali', 'Medan'];
-const clothingTypes = ['Semua', 'Kebaya', 'Gaun Pengantin', 'Jas Formal', 'Kemeja', 'Batik', 'Casual Wear', 'Seragam'];
-const serviceTypes = ['Semua', 'Jahit Baru', 'Permak', 'Custom', 'Bordir'];
-
-const allTailors = [
-  {
-    name: 'Rina Boutique', rating: 4.9, reviews: 312, clothing: 'Kebaya', service: 'Jahit Baru',
-    location: 'Bandung', image: toko1Img,
-    price: 'Mulai Rp 350rb', yearsExp: 12,
-  },
-  {
-    name: 'Dewi Couture', rating: 4.9, reviews: 265, clothing: 'Gaun Pengantin', service: 'Custom',
-    location: 'Bali', image: toko4Img,
-    price: 'Mulai Rp 1.5jt', yearsExp: 14,
-  },
-  {
-    name: 'Atelier By Budi', rating: 4.9, reviews: 248, clothing: 'Jas Formal', service: 'Jahit Baru',
-    location: 'Jakarta Selatan', image: toko2Img,
-    price: 'Mulai Rp 700rb', yearsExp: 15,
-  },
-  {
-    name: 'Maison Sari', rating: 4.8, reviews: 196, clothing: 'Batik', service: 'Custom',
-    location: 'Yogyakarta', image: toko3Img,
-    price: 'Mulai Rp 250rb', yearsExp: 8,
-  },
-  {
-    name: 'Bordir Nusantara', rating: 4.8, reviews: 178, clothing: 'Batik', service: 'Bordir',
-    location: 'Surabaya', image: toko5Img,
-    price: 'Mulai Rp 100rb', yearsExp: 10,
-  },
-  {
-    name: 'Permak Express', rating: 4.7, reviews: 421, clothing: 'Kemeja', service: 'Permak',
-    location: 'Jakarta Pusat', image: toko6Img,
-    price: 'Mulai Rp 35rb', yearsExp: 6,
-  },
-];
+import { TailorDetail } from './TailorDetail';
+import { allTailors, clothingTypes, locations, serviceTypes, TailorData } from '../data/tailors';
 
 type DropdownProps = {
   label: string;

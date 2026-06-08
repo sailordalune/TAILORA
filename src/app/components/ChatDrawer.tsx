@@ -5,7 +5,7 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ImageWithFallback } from './common/ImageWithFallback';
-import { TailorData } from './TailorDetail';
+import { TailorData } from '../data/tailors';
 
 type Msg = {
   id: number;
